@@ -24,12 +24,23 @@ class SongsController < ApplicationController
     redirect "songs/#{@song.slug}"
   end
 
+  get '/songs/:slug/edit' do
+    @song = Song.find_by_slug(params[:slug])
+    erb :'/songs/edit'
+  end
+
+  patch '/songs/:slug' do
+    binding.pry
+    @song = Song.find_by(name: params[:song][:name])
+    @song.artist = Artist.find_or_create_by(name: params["artist"]["name"])
+    @song.save
+
+    redirect "songs/#{@song.slug}"
+  end
+
   get '/songs/:slug' do
     @song = Song.find_by_slug(params[:slug])
     erb :'/songs/show'
   end
 
-  get '/songs/:slug/edit' do 
-    
-  end
 end
