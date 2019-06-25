@@ -8,12 +8,12 @@ class Artist < ActiveRecord::Base
 	end	
 
 	def self.find_by_slug(slug)
-		found_artist = nil
-		Artist.all.collect do |artist| 
-			if artist.slug == slug  #compares if the Artist object's slug name is equal to the provided slug name
-				found_artist = artist
+		found_obj = nil
+		self.all.collect do |obj| 
+			if obj.slug == slug  #compares if the Artist object's slug name is equal to the provided slug name
+				found_obj = obj
 			end
 		end
-		found_artist  #returns the matching Artist object
+		found_obj  #returns the matching Artist object
 	end
 end
