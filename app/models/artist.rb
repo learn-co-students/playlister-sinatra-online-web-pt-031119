@@ -9,12 +9,11 @@ class Artist < ActiveRecord::Base
 
 	def self.find_by_slug(slug)
 		found_artist = nil
-		Artist.all.collect do |artist|
-			# binding.pry
-			if artist.slug == slug
+		Artist.all.collect do |artist| 
+			if artist.slug == slug  #compares if the Artist object's slug name is equal to the provided slug name
 				found_artist = artist
 			end
 		end
-		found_artist
+		found_artist  #returns the matching Artist object
 	end
 end
