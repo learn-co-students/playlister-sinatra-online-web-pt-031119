@@ -15,7 +15,6 @@ class Artist < ActiveRecord::Base
 				found_artist = artist
 			end
 		end
-		# binding.pry
 		found_artist
 	end
 end
