@@ -35,15 +35,17 @@ class SongsController < ApplicationController
 	end
 
 	patch '/songs/:id' do
-		if Artist.find_by_name(params["Artist Name"])
-			@artist = Artist.find_by_name(params["Artist Name"])
-		else
-			@artist = Artist.create(name: params["Artist Name"])
-		end
-		@genre = Genre.find_by_id(params[:genres])
 		@song = Song.find(params[:id])
-		@song.update(artist: @artist)
+		@genre = Genre.find_by_id(params[:genres])
 		@song.update(genre_ids: @genre.id)
+		if params["Artist Name"] != "" && Artist.find_by_name(params["Artist Name"]) != nil
+			@artist = Artist.find_by_name(params["Artist Name"])
+			@song.update(artist: @artist)
+		elsif
+			params["Artist Name"] != "" && Artist.find_by_name(params["Artist Name"]) == nil
+			@artist = Artist.create(name: params["Artist Name"])
+			@song.update(artist: @artist)
+		end
 		redirect "/songs/#{@song.slug}"
 	end
 
