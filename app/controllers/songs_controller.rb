@@ -1,4 +1,9 @@
+require 'sinatra/base'
+require 'rack-flash3'
+
 class SongsController < ApplicationController
+
+	use Rack::Flash
 
 	get '/songs' do 
 		@songs = Song.all
@@ -24,6 +29,7 @@ class SongsController < ApplicationController
 		@genre = Genre.find_by_id(params[:genres])
 		@song = Song.create(name: params["Name"], artist: @artist)
 		@song.genre_ids = @genre.id
+		flash[:message] = "Successfully created song."
 		redirect "/songs/#{@song.slug}"
 	end
 
@@ -46,6 +52,7 @@ class SongsController < ApplicationController
 			@artist = Artist.create(name: params["Artist Name"])
 			@song.update(artist: @artist)
 		end
+		flash[:message] = "Successfully updated song."
 		redirect "/songs/#{@song.slug}"
 	end
 
