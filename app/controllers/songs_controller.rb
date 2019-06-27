@@ -25,9 +25,9 @@ class SongsController < ApplicationController
 		else
 			@artist = Artist.create(name: params["Artist Name"])
 		end
-		@genre = Genre.find_by_id(params[:genres])
+
 		@song = Song.create(name: params["Name"], artist: @artist)
-		@song.genre_ids = @genre.id
+		@song.genre_ids = params[:genres]
 		flash[:message] = "Successfully created song."
 		redirect "/songs/#{@song.slug}"
 	end
@@ -41,8 +41,7 @@ class SongsController < ApplicationController
 
 	patch '/songs/:id' do
 		@song = Song.find(params[:id])
-		@genre = Genre.find_by_id(params[:genres])
-		@song.update(genre_ids: @genre.id)
+		@song.genre_ids = params[:genres]
 		if params["Artist Name"] != "" && Artist.find_by_name(params["Artist Name"]) != nil
 			@artist = Artist.find_by_name(params["Artist Name"])
 			@song.update(artist: @artist)
