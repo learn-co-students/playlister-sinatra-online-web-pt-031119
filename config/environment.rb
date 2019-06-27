@@ -2,7 +2,6 @@ ENV['SINATRA_ENV'] ||= "development"
 
 require 'bundler/setup'
 require 'pry'
-require 'rack-flash3'
 Bundler.require(:default, ENV['SINATRA_ENV'])
 
 def fi_check_migration

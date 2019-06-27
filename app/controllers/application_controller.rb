@@ -1,9 +1,5 @@
-require 'sinatra/base'
-require 'rack-flash3'
-
 class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
-  use Rack::Flash
   configure do
   	enable :sessions
   	set :session_secret, "my_application_secret"

@@ -1,5 +1,4 @@
-require 'sinatra/base'
-require 'rack-flash3'
+require 'rack-flash'
 
 class SongsController < ApplicationController
 
